@@ -1,0 +1,31 @@
+header{
+    text-align: center;
+    font-size: larger;
+    color: whitesmoke;
+    border: 1rem groove ;
+    background-color: maroon;
+    font-style: italic;
+   
+}
+body{
+    background-color: cornsilk;
+    background-image: url('cricketbg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+   
+}
+.grid-container{
+   
+    width:auto;
+    height:auto;
+    padding:1rem;
+    font-size: x-large;
+    text-align: justify;
+    
+}
+.cricket{
+    margin-left: auto;
+    margin-right: auto;
+    align:center;
+}
