@@ -1,0 +1,51 @@
+Title: Employee Table
+-- Author: B.KAMAL
+-- Created Date: 04.04.2024
+-- Last modified Date: 04.04.2024
+-- Reviewed By:
+-- Reviewed Date: 
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stone Paper Scissors</title>
+  <link rel="stylesheet" href="game.css">
+</head>
+<body>
+  <h1>STONE PAPER SCISSORS </h1>
+  <div class ="container">
+  <div class = "game">
+  <p>CHOOSE YOUR MOVE :</p>
+  <button onclick="play('stone')">Stone</button>
+  <button onclick="play('paper')">Paper</button>
+  <button onclick="play('scissors')">Scissors</button></div></div>
+  
+  <div class="result" id="result"></div>
+  
+  <script>
+    function play(playerMove) {
+      const moves = ['stone', 'paper', 'scissors'];
+      const computerMove = moves[Math.floor(Math.random() * moves.length)];
+      let result = '';
+      
+      if (playerMove === computerMove) {
+        result = 'It\'s a tie!';
+      } else if (
+        (playerMove === 'stone' && computerMove === 'scissors') ||
+        (playerMove === 'paper' && computerMove === 'stone') ||
+        (playerMove === 'scissors' && computerMove === 'paper')
+      ) {
+        result = 'You win!';
+      } else {
+        result = 'Computer wins!';
+      }
+      
+      
+      document.getElementById('result').innerText = `You chose ${playerMove}. Computer chose ${computerMove}. ${result}`;
+     } 
+  </script>
+  
+
