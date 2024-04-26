@@ -1,0 +1,223 @@
+//adventure ,discovery,mystery, journey,treasure,challenge,courge ,friendship,dream,magic,hope,escape,promise,wonder,home,choice,change,beginning,heart//
+
+/*
+ * Title : DBMS SQL Assignment
+ * Author : KAMAL B
+ * Created At : 04-04-2024
+ * Last Modified Date : 13-04-2024
+ * Reviewed By :
+ * Review Date :
+ */
+
+ --programmer
+CREATE TABLE `programmer` (
+  `name` varchar(8) NOT NULL,
+  `dob` date NOT NULL,
+  `doj` date NOT NULL,
+  `sex` varchar(1) NOT NULL,
+  `prof1` varchar(8) DEFAULT NULL,
+  `prof2` varchar(8) DEFAULT NULL,
+  `salary` int(4) NOT NULL
+)
+INSERT INTO `programmer` (`name`, `dob`, `doj`, `sex`, `prof1`, `prof2`, `salary`) VALUES
+('somdutt', '1966-04-20', '1992-04-21', 'm', 'pascal', 'basic', 3200),
+('ram', '1975-06-20', '1995-10-15', 'm', 'dbase', 'COBOL', 4800),
+('rajesh', '1982-12-08', '2000-04-25', 'm', 'Pascal', 'C', 4300),
+('ramesh', '1978-03-17', '1998-09-05', 'm', 'C', 'BASIC', 3600),
+('mary', '1985-09-30', '2005-02-12', 'f', 'COBOL', 'Pascal', 3900);
+
+--software
+CREATE TABLE `software` (
+  `name` varchar(8) NOT NULL,
+  `title` varchar(20) NOT NULL,
+  `dev_in` varchar(8) NOT NULL,
+  `scost` decimal(7,2) DEFAULT NULL,
+  `dcost` int(5) DEFAULT NULL,
+  `sold` int(3) DEFAULT NULL
+)
+INSERT INTO `software` (`name`, `title`, `dev_in`, `scost`, `dcost`, `sold`) VALUES
+('Somdutt', 'Parachutes', 'Basic', 399.95, 6000, 43),
+('Somdutt', 'Accounting Software', 'Basic', 399.95, 6000, 43),
+('Ram', 'Inventory Management', 'dbase', 500.50, 3000, 30),
+('Rajesh', 'Data Analysis Tool', 'Pascal', 799.75, 4500, 35),
+('ramesh', 'Web Development Fram', 'C', 600.25, 4000, 40),
+('mary', 'Document Management ', 'COBOL', 899.00, 5000, 50);
+
+--studies
+CREATE TABLE `studies` (
+  `name` varchar(8) NOT NULL,
+  `splace` varchar(9) NOT NULL,
+  `course` varchar(5) NOT NULL,
+  `ccost` varchar(5) NOT NULL
+)
+INSERT INTO `studies` (`name`, `splace`, `course`, `ccost`) VALUES
+('Somdutt', 'sabhari', 'PGDCA', '1000'),
+('Ram', 'bdps', 'DCS', '1500'),
+('Rajesh', 'sabhari', 'PGDCA', '1000'),
+('ramesh', 'bdps', 'DCS', '1500'),
+('mary', 'sabhari', 'PGDCA', '1000');
+
+//queries1:
+
+
+
+1.SELECT AVG(scost) FROM Software WHERE dev_in = "pascal";
+2.SELECT name, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS age FROM programmer;
+3.SELECT programmer.name, TIMESTAMPDIFF(YEAR, programmer.dob, CURDATE()) AS age FROM programmer JOIN studies  ON programmer.name = studies.name WHERE studies.course = 'DCS';
+4.SELECT  MAX(sold) AS highest_number_copies FROM software;
+5.SELECT name, dob FROM programmer WHERE MONTH(dob) = 1;
+6.SELECT MIN(ccost) as minimum_course_fee FROM studies;
+7.SELECT COUNT(course) FROM studies WHERE course='pgdca';
+8.SELECT SUM(scost * sold) AS total_revenue FROM software WHERE dev_in = 'C';
+9.SELECT * FROM software WHERE name='ramesh';
+10.SELECT COUNT(splace) FROM studies WHERE splace='sabhari';
+11.SELECT * FROM software WHERE sold>=20000; 
+12.SELECT title, CEIL(dcost / scost) AS copies_to_sell FROM software;
+13.SELECT  max(scost) from software WHERE dev_in = 'basic';
+14.SELECT * FROM software WHERE SOLD>= CEIL(scost/dcost);
+15.SELECT COUNT(dev_in) FROM software WHERE dev_in = 'dbase';
+16.SELECT COUNT(name) FROM studies WHERE splace ='paragathi';
+17.SELECT COUNT(name) FROM studies WHERE ccost  BETWEEN 5000 AND 10000;
+18.SELECT AVG(ccost) FROM studies;
+19.SELECT * FROM programmer WHERE prof1 ='C' OR prof2 ='C';
+20.SELECT COUNT(name) from programmer WHERE prof1 in ('cobal','pascal') or prof2 in ('cobal', 'pascal');
+21.SELECT COUNT(name) from programmer WHERE prof1 NOT IN ('c','pascal') AND prof2 NOT IN ('c', 'pascal');
+22.SELECT MAX(timestampdiff(year,dob,CURDATE())) AS oldest FROM programmer ;
+23.SELECT avg(TIMESTAMPDIFF(year,dob,CURDATE())) AS avg_age FROM programmer WHERE sex= 'f';
+24.SELECT TIMESTAMPDIFF(year,dob,CURDATE()) AS experience FROM programmer order BY experience DESC;
+25.SELECT name FROM programmer WHERE MONTH(dob)=MONTH(CURDATE());
+26.SELECT COUNT(name) from programmer where sex='f';
+27.
+28.SELECT AVG(salary) FROM programmer;
+29.SELECT COUNT(name) from programmer WHERE salary BETWEEN 2000 AND 4000; 
+30.SELECT * FROM programmer where prof1 NOT IN('pascal','clipper','cobol') AND prof2 NOT IN('pascal','clipper','cobol');
+31.SELECT COUNT(name) FROM programmer WHERE sex ='f' AND prof1 ='C' AND TIMESTAMPDIFF(YEAR, dob, CURDATE()) > 24 OR prof2 ='C' AND TIMESTAMPDIFF(YEAR, dob, CURDATE()) > 24;
+32.SELECT * FROM programmer WHERE DAY(dob) BETWEEN DAY(CURDATE()) AND DAY(CURDATE() + INTERVAL 7 DAY) AND MONTH(dob) = MONTH(CURDATE());
+33.SELECT * FROM programmer WHERE TIMESTAMPDIFF(YEAR, doj, CURDATE()) <1;
+34.SELECT * FROM programmer WHERE TIMESTAMPDIFF(YEAR, doj, CURDATE()) =2;
+35.SELECT (dcost - (scost * sold)) AS amount_need FROM software WHERE dcost > (scost * sold);
+36.SELECT * FROM software WHERE sold = 0;
+37.SELECT scost FROM software WHERE name= 'mary';
+38.SELECT DISTINCT course FROM studies;
+39.SELECT COUNT(DISTINCT course) as course FROM studies;
+40.SELECT name FROM Programmer WHERE name LIKE '%A%A%';
+41.SELECT name FROM programmer WHERE LENGTH(name)= 5;
+42.SELECT * FROM programmer WHERE sex='f' AND (prof1= 'cobol' AND TIMESTAMPDIFF(year,doj,CURDATE())=2) OR (prof2= 'cobol' AND TIMESTAMPDIFF(year,doj,CURDATE())=2);
+43.SELECT MIN(LENGTH(name)) AS min FROM programmer;
+44.SELECT AVG(dcost) FROM software WHERE dev_in='cobol';
+45.
+46.SELECT name from programmer WHERE(LAST_day(dob)=DAY(dob));
+47.SELECT name, salary FROM programmer WHERE sex='m' AND prof1 NOT in ('cobol') AND prof2 NOT IN ('cobol');
+48.SELECT title , scost, dcost, (scost-dcost) AS profit FROM software ORDER BY profit DESC;
+49.SELECT name, dob, doj FROM programmer WHERE MONTH(dob) = MONTH(doj);
+50.SELECT title FROM software WHERE title LIKE '% %';
+
+
+//queries2
+1.SELECT dev_in,COUNT(title)  from software GROUP BY dev_in;
+2.SELECT name, COUNT(*) AS num FROM software GROUP BY name;
+3.SELECT sex,COUNT(*) AS num FROM programmer GROUP BY sex;
+4.SELECT dev_in,MAX(scost),MAX(sold) FROM software GROUP BY dev_in;
+5.SELECT YEAR(dob) AS birthyear, count(*) as num from programmer GROUP BY dob;
+6.SELECT YEAR(doj) AS joinyear, count(*) as num from programmer GROUP BY doj;
+7.SELECT MONTH(dob) AS birthmonth, count(*) as num from programmer GROUP BY dob;
+8.SELECT MONTH(doj) AS joinmonth, count(*) as num from programmer GROUP BY doj;
+9.SELECT prof1,count(*) from programmer GROUP BY prof1;
+10.SELECT prof2,count(*) from programmer GROUP BY prof2;
+11.SELECT salary, COUNT(*) AS num from programmer GROUP BY salary;
+12.SELECT splace, COUNT(*) AS num from studies GROUP BY splace;
+13.SELECT course, COUNT(*) AS num from studies GROUP BY course;
+14.SELECT dev_in, sum(dcost) AS num from software GROUP BY dev_in;
+15.SELECT dev_in, sum(scost) AS sellingcost from software GROUP BY dev_in;
+16.SELECT name, sum(dcost) AS total from software GROUP BY name;
+17.SELECT name, sum(scost*sold) AS cost from software GROUP BY name;
+18.SELECT name, COUNT(*) packages from software GROUP BY name;
+19.SELECT dev_in ,sum(scost) as sellingcost from software GROUP BY dev_in;
+20.SELECT name ,MIN(dcost) AS cheap ,MAX(dcost) AS costliest  FROM software GROUP BY name;
+21.SELECT dev_in ,AVG(DCOST),AVG(SCOST),AVG(SCOST) FROM software GROUP BY dev_in;
+22.SELECT SPLACE,COUNT(course),AVG(ccost) FROM studies GROUP BY splace;
+23.SELECT SPLACE,COUNT(name) FROM studies GROUP BY splace;
+24.SELECT name,sex from programmer;
+25.SELECT name,title FROM software ORDER BY name;
+26.SELECT dev_in, COUNT(title) FROM software GROUP BY dev_in;
+27.SELECT dev_in, COUNT(dcost) AS dcost FROM software WHERE dcost < 1000 GROUP BY dev_in;
+28.SELECT dev_in, AVG(scost - dcost) AS avg_costdifference FROM software GROUP BY dev_in;
+29.
+
+30.SELECT MAX(salary), MIN(salary),AVG(salary) FROM   programmer WHERE salary > 2000;
+
+//queries3
+
+1.select name from programmer where prof1='c' or prof2='c' order by salary desc limit 1;
+2.select name from programmer where sex='f' and (prof1='cobol' or prof2='cobol') order by salary desc limit 1;
+/*3*/
+4.select name from programmer order by doj asc limit 1;
+5.select name from programmer order by doj desc limit 1;
+6.select prof1 from programmer group by prof1 having count(*) = 1;
+7.select name from programmer where prof1='dbase' or prof2='dbase' order by dob limit 1;
+8.select splace from studies group by splace order by count(*) desc limit 1;
+/*9*/
+10.select name from Programmer where sex = 'f' and prof1 not in ('c', 'c++', 'oracle', 'dbase') and prof2 not in ('c', 'c++', 'oracle', 'dbase') and     salary > 3000;
+11.select course from studies order by ccost desc limit 1;
+12.select course from Studies group by course having count(*) = (select max(cnt) from (select count(*) as cnt from Studies group by course) as temp);
+13.select splace, course from Studies group by splace, course having avg(ccost) < (select avg(ccost) from Studies);
+14.select splace from Studies group by splace having max(ccost)= (select max(ccost) from Studies);
+15.select course from Studies group by course having count(*) < (select avg(cnt) from (select count(*) as cnt from Studies group by course) as temp);
+/*16*/
+17.select course from Studies group by course having avg(ccost) between (avg(ccost) - 1000) and (avg(ccost) + 1000);
+18.select dev_in from software order by dcost desc limit 1;
+19.select dev_in from software order by scost limit 1;
+20.select name from software order by sold limit 1;
+21.select dev_in from software order by scost desc limit 1;
+22.select name from software order by sold limit 1;
+23.select title from software where dev_in = 'pascal' order by scost limit 1;
+24.select dev_in from software group by dev_in order by count(*) desc limit 1;
+25.select name from programmer order by salary desc limit 1;
+26.select name from software where scost = (select max(scost) from software) limit 1;
+27.select name from software where sold < (select avg(sold) from software);
+28.select name from programmer where sex = 'f' and salary > (select max(salary) from programmer where sex = 'm');
+29.select prof1 from programmer group by prof1 order by count(*) desc limit 1;
+30.select name from software where (scost - dcost) > (select 2 * dcost from software where name = software.name limit 1);
+31.select name, min(dcost) from software group by name;
+32.select name from programmer where sex = 'm' and dob = (select min(dob) from programmer where sex = 'm' and year(dob) = 1965) limit 1;
+33.select distinct dev_in from software where name = (select name from software order by sold desc limit 1) or name = (select name from software order by sold limit 1);
+34.select name from programmer where sex = 'f' and dob = (select max(dob) from programmer where sex = 'f' and year(dob) = 1992) limit 1;
+35.select year(dob) as Birth_Year, count(*) as Programmer_Count from programmer group by year(dob) order by Programmer_Count desc limit 1;
+36.select month(doj) as Join_Month, count(*) as Programmer_Count from programmer group by month(doj) order by Programmer_Count desc limit 1;
+37.select prof1 as Language, count(*) as Programmer_Count from programmer group by prof1 order by Programmer_Count desc limit 1;
+38.select name from programmer where sex = 'm' and salary < (select avg(salary) from programmer where sex = 'f') limit 1;
+
+
+//queries 4
+
+
+SELECT * FROM programmer WHERE salary IN (SELECT salary FROM programmer GROUP BY salary HAVING COUNT(*) > 1);
+SELECT software.* FROM software JOIN programmer ON software.name = programmer.name WHERE programmer.sex = 'm' AND programmer.salary > 3000;
+SELECT * FROM software WHERE dev_in = 'PASCAL' AND name IN (SELECT name FROM programmer WHERE sex = 'f');
+SELECT * FROM programmer WHERE YEAR(doj) < 1990;
+select s.* from software s,studies st,programmer p where s.name=st.name and p.name=s.name and sex='f' and splace='pragathi';
+Select studies.splace, count(software.dev_in), count(software.sold), sum(software.sold*software.scost) from software,studies where software.name=studies.name group by studies.splace;
+/*7*/
+SELECT s.* FROM software s JOIN programmer p ON s.name = p.name WHERE (p.sex = 'm' AND p.dob < '1965-01-01') OR (p.sex = 'f' AND p.dob > '1975-12-31');
+SELECT s.* FROM software s JOIN programmer p ON s.name = p.name WHERE s.dev_in <> p.prof1;
+SELECT s.* FROM software s JOIN programmer p ON s.name = p.name WHERE s.dev_in <> p.prof1 AND s.dev_in <> p.prof2;
+select s.* from programmer p,software s,studies st where p.name=s.name and s.name=st.name and sex='m' and splace='sabhari';
+SELECT p.name FROM programmer p LEFT JOIN software s ON p.name = s.name WHERE s.name IS NULL;
+SELECT SUM(scost) FROM software s,studies st WHERE s.name=st.name and splace='apple';
+SELECT a.name,a.doj FROM programmer a,programmer b WHERE a.doj=b.doj and a.name <> b.name;
+SELECT p1.name AS programmer1, p2.name AS programmer2, p1.prof2 FROM programmer p1 JOIN programmer p2 ON p1.prof2 = p2.prof2 AND p1.name <> p2.name;
+SELECT studies.splace,SUM(software.sold*software.scost) FROM software,studies WHERE studies.name=software.name GROUP BY studies.splace;
+/*17*/
+/*18*/
+SELECT p.name, p.salary, s.course FROM programmer p JOIN ( SELECT name, MAX(scost * sold) AS highest_sales FROM software) AS max_sales ON p.name = max_sales.name JOIN studies s ON p.name = s.name;
+SELECT programmer.name, ccost / (salary / 12) AS monthstorecover FROM programmer JOIN studies ON programmer.name = studies.name ;
+SELECT s.title AS costliest FROM software s JOIN (SELECT name FROM programmer WHERE TIMESTAMPDIFF(year, doj, CURDATE()) < 3) AS newprogrammers ON s.name = newprogrammers.name ORDER BY scost DESC LIMIT 1;
+SELECT AVG(salary) FROM programmer WHERE name IN (SELECT name FROM software GROUP BY name HAVING SUM(scost * sold) > 50000);
+SELECT COUNT(s.name) FROM software s,studies st WHERE s.name=st.name GROUP BY s.name,ccost HAViNG MIN(ccost)=(select MIN(ccost) FROM studies);
+SELECT COUNT(*) FROM programmer p,software s WHERE s .name=p.name GROUP BY dev_in HAVING MIN(dcost)=(SELECT MIN(dcost) FROM software);
+SELECT COUNT(dev_in) FROM programmer p,software s WHERE s.name=p.name AND sex='f' AND salary>(SELECT MAX(salary) FROM programmer p,software s WHERE s.name=p.name and sex='m');
+SELECT name,splace FROM studies WHERE name NOT IN(SELECT name FROM software);
+SELECT COUNT(*),sum(scost*sold-dcost) "PROFIT" FROM software WHERE dev_in IN (SELECT prof1 FROM programmer) GROUP BY dev_in;
+SELECT s.name,COUNT(dev_in) FROM programmer p1,software s WHERE p1.name=s.name GROUP BY s.name;
+SELECT * FROM programmer WHERE name IN ( SELECT name FROM studies WHERE splace = 'S.S.I.L.' );
+
