@@ -1,0 +1,72 @@
+// Show existing databases
+show databases;
+
+// Switch to the 'section' database
+use section;
+
+// Show collections 
+show collections;
+
+// Insert documents into the 'employee' collection
+db.employee.insertOne({"_id":1,"name":"tamil","designation":"Testing"});
+db.employee.insertOne({"_id":2,"name":"afru","designation":"Developer"});
+db.employee.insertMany([
+    {"_id":3,"name":"muthu","designation":"Testing"},
+    {"_id":4,"name":"naresh","designation":"developer"},
+    {"_id":5,"name":"sugu","designation":"marketing"}
+]);
+
+// Delete a document with _id: 1 from the 'employee' collection
+db.employee.deleteOne({ "_id": 1 });
+
+// Delete documents where designation is "developer" from the 'employee' collection
+db.employee.deleteMany({ "designation": "developer" });
+
+// Insert multiple documents into the 'employee' collection with unordered insert (ignores duplicates)
+db.employee.insertMany([
+    {"_id":3,"name":"Divya","designation":"Testing"},
+    {"_id":4,"name":"paramanandham","designation":"developer"},
+    {"_id":5,"name":"anbu","designation":"marketing"},
+    {"_id":6,"name":"anandh","designation":"Testing"},
+    {"_id":4,"name":"kalaiarasan","designation":"developer"},
+    {"_id":7,"name":"ranjitha","designation":"Testing"}
+], {ordered:false});
+
+// Find all documents in the 'employee' collection
+db.employee.find({});
+
+// Rename 'employee' collection to 'employeeDetails'
+db.employee.renameCollection("employeeDetails");
+
+// Drop the 'employeeDetails' collection
+db.employeeDetails.drop();
+
+// Insert documents into the 'employees' collection
+db.employees.insertMany([
+    { "_id":1, "emp_name":"Kamal", "emp_salary":30000, "known_language":["python","java"]},
+    { "_id":2, "emp_name":"suresh", "emp_salary":40000, "known_language":["perl","C"]},
+    { "_id":3, "emp_name":"dhinesh", "emp_salary":57000, "known_language":["C++","java"]},
+    { "_id":4, "emp_name":"rajesh", "emp_salary":58000, "known_language":["C","java"]}
+]);
+
+// Find all documents 
+db.employees.find({});
+
+// where 'emp_name' is "tamil" 
+db.employees.find({"emp_name":"Kamal"});
+
+// where '_id' is 1 or 4 
+db.employees.find({"_id":{$in:[1,4]}});
+
+// where '_id' is 1 and 'emp_salary' is less than 40000 
+db.employees.find({"_id":1,"emp_salary":{$lt:40000}});
+
+// where 'emp_salary' is 35000 or 40000 
+db.employees.find({$or:[{"emp_salary":35000},{"emp_salary":40000}]});
+
+// where '_id' is 1 and 'emp_salary' is 35000 or 40000 
+db.employees.find({"_id":1,$or:[{"emp_salary":35000},{"emp_salary":40000}]});
+
+// Delete the database
+use class;
+db.dropDatabase();
