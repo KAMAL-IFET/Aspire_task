@@ -1,0 +1,46 @@
+
+//common methods applied to all collection 
+
+size()
+isEmpty()=>boolean
+contains()
+containsAll()
+iterator() // iterating on a array
+toArray()
+add()  // add a value
+addAll()
+remove()
+removeAll()
+retainAll()
+clear()
+
+
+
+get() // specific value
+set()//replace a  existing value 
+indexOf()// index vakue
+listIterator()// it is used  specially at linked list .
+lastIndexOf()// last index
+subList()// part of  value 
+sort() // sorting on ascending order 
+
+
+add()
+offer()
+remove()
+poll()// 
+peek()  // retrieve  first element of the queue
+
+MAP("IND"="INDIA","US"="United States")
+size()
+isEmpty()
+put(Key,value)
+get(Key)
+remove(key)
+entrySet()=k,v
+Keyset()=k
+values()
+putAll() // key all value to  the map
+clear()
+replace()
+putIfAbsent()  // value is new add orelse not 

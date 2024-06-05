@@ -1,0 +1,125 @@
+try throw catch finally - 4 keywords in exception handling
+
+checked exception - compile time  exception
+default exception knownbybthe system 
+IO Exception ,filehandling exception,SQL exception
+
+unchecked exception -runtime  excepton
+
+few technology throwable is a parent 
+in some exception is a parent 
+
+it coming  from lang package in java .
+
+
+
+
+try{
+
+// it will throw the respective exception as a object. 
+
+throw respective ball as blue 
+
+}
+catch(exception object){
+
+}
+catch(ball blue){
+
+
+}
+catch(ball mixed){
+
+
+}
+//stack call mechanism 
+
+
+try{
+ try{
+
+// trycanbe nested
+}
+catch{
+//handle the catch  inside the try 
+}
+}
+catch{
+}
+finally{
+//it will mandatory to work 
+}
+
+
+public class NestedFinallyExample {
+    public static void main(String[] args) {
+        try {
+            // Outer try block
+            System.out.println("Entering outer try block");
+
+            try {
+                // Inner try block
+                System.out.println("Entering inner try block");
+                int result = 10 / 0; // This will cause an ArithmeticException
+                System.out.println("Result: " + result);
+            } catch (ArithmeticException e) {
+                // Handling exception in inner try block
+                System.out.println("Inner catch block: Exception caught: " + e.getMessage());
+            } finally {
+                // Inner finally block
+                System.out.println("Inner finally block: This always executes.");
+            }
+
+            // Code after inner try-catch-finally
+            System.out.println("Code after inner try-catch-finally block");
+
+        } catch (Exception e) {
+            // Outer catch block
+            System.out.println("Outer catch block: Exception caught: " + e.getMessage());
+        } finally {
+            // Outer finally block
+            System.out.println("Outer finally block: This always executes.");
+        }
+
+        System.out.println("Program continues after outer try-catch-finally block.");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+more than one finally block
+finally block inside try
